@@ -3,11 +3,18 @@
     <head>
         <title>Blog</title>
         <style>
-            .new-post {
+            .new_post_box {
                 height: 400px;
                 width: 400px;
             }
         </style>
+
+        <header>
+            <nav>
+                <a href="{{ url_for('blog_main') }}">Main Page</a>
+                <a href="{{ url_for('new_post') }}">New Post</a>
+            </nav>
+        </header>
 
     </head>
     <body>

@@ -7,8 +7,25 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://build-a-blog:buildingbl
 app.config['SQLALCHEMY_ECHO'] = True
 db = SQLAlchemy(app)
 
+class Blog(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(120))
+    post = db.Column(db.Text)
+
+    def __init__(self, title, post):
+        self.title = title
+        self.post = post
+
+def check_post(title, post):
+    #Checks to verify if the post provided has a title and content
+    if title == '' or post == '':
+        return False
+    else:
+        return True
+
 @app.route('/')
 def index():
+    #The main page will be the blog page that displays all posts
     return redirect('/blog')
 
 @app.route('/blog', methods=['POST', 'GET'])
@@ -20,26 +37,29 @@ def blog_main():
 @app.route('/newpost', methods=['POST', 'GET'])
 def new_post():
     
+
+    return render_template('newpost.html')
+
+@app.route('/add-post', methods=['POST'])
+def add_post():
+
+
     if request.method == 'POST':
         blog_title = request.form['blog-title']
         blog_post = request.form['blog-post']
+        valid_post = check_post(blog_title, blog_post)
+        if valid_post == False:
+            #if post is invalid re-render newpost page with an error message
+            return render_template('/newpost.html', valid_post=valid_post)
         add_post = Blog(blog_title, blog_post)
         db.session.add(add_post)
         db.session.commit()
-    return redirect('/blog')
+    return redirect('/')
 
 
 
 
 
-class Blog(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(120))
-    post = db.Column(db.Text)
-
-    def __init__(self, title, post):
-        self.title = title
-        self.post = post
 
 
 if __name__ == '__main__':

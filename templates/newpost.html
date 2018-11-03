@@ -2,15 +2,24 @@
 
 {% block content %}
     <h1>New Post</h1>
-    <form method='post'>
+
+    {% if valid_post==False %}
+    <!--If the post submitted did not include a title or content then display error-->
+    <h2 style='color:red;'>Please enter a title and a post</h2>
+    {% endif %}
+    <form method='post' action='/add-post'  class="new-post">
         <label>
             Title:
             <input type="text" name="blog-title" />
         </label>
+        <br>
+        <br>
         <label>
             New Post:
-            <input type="text" name="blog-post" class="new-post" />
+            <input type="text" name="blog-post" class='new_post_box' />
         </label>
+        <br>
+        <input type='submit' value='Submit Post' />
     </form>
 
 

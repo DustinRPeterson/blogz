@@ -1,16 +1,19 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class='blog_main'>
 
 {% if posts|length == 0 %}
+<!-- if no posts are stored then display below-->
     <p>No blog posts</p>
 {% else %}
+<!-- If posts are stored render the posts-->
     <ul>
         {% for post in posts %}
-        <li>{{post}}</li>
+        <li>{{post.title}}<br>{{post.post}}</li>
         {% endfor %}
     </ul>
 {% endif %}
 
-
+</div>
 {% endblock %}
