@@ -31,6 +31,10 @@ def index():
 @app.route('/blog', methods=['POST', 'GET'])
 def blog_main():
     posts = Blog.query.all()
+    link_to_post = request.args.get('id')
+    if link_to_post:
+        posts = Blog.query.filter_by(id=link_to_post).all()
+        return render_template('blog.html', title="Blog", posts=posts)
     return render_template('blog.html', title="Blog", posts=posts)
 
 
@@ -54,6 +58,9 @@ def add_post():
         add_post = Blog(blog_title, blog_post)
         db.session.add(add_post)
         db.session.commit()
+        newest_post= Blog.query.filter_by(title=blog_title).first()
+        post_id = newest_post.id
+        return render_template('blog.html/?id={post_id}'.format(post_id))
     return redirect('/')
 
 

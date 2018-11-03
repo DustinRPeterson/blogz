@@ -3,17 +3,16 @@
 {% block content %}
 <div class='blog_main'>
 
-{% if posts|length == 0 %}
-<!-- if no posts are stored then display below-->
-    <p>No blog posts</p>
-{% else %}
+
 <!-- If posts are stored render the posts-->
     <ul>
         {% for post in posts %}
-        <li>{{post.title}}<br>{{post.post}}</li>
+        <form method = 'get'>
+            <li><a href='./blog?id={{post.id}}'>{{post.title}}</a><br>{{post.post}}</li>
+        </form>
         {% endfor %}
     </ul>
-{% endif %}
+
 
 </div>
 {% endblock %}
