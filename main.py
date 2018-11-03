@@ -7,12 +7,26 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://build-a-blog:buildingbl
 app.config['SQLALCHEMY_ECHO'] = True
 db = SQLAlchemy(app)
 
-#@app.route('/')
+@app.route('/')
+def index():
+    return redirect('/blog')
 
-#@app.route('/blog')
+@app.route('/blog', methods=['POST', 'GET'])
+def blog_main():
+    posts = Blog.query.all()
+    return render_template('blog.html', title="Blog", posts=posts)
 
-#@app.route('/newpost')
 
+@app.route('/newpost', methods=['POST', 'GET'])
+def new_post():
+    
+    if request.method == 'POST':
+        blog_title = request.form['blog-title']
+        blog_post = request.form['blog-post']
+        add_post = Blog(blog_title, blog_post)
+        db.session.add(add_post)
+        db.session.commit()
+    return redirect('/blog')
 
 
 
@@ -28,4 +42,6 @@ class Blog(db.Model):
         self.post = post
 
 
+if __name__ == '__main__':
+    app.run()
 
