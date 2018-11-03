@@ -58,9 +58,8 @@ def add_post():
         add_post = Blog(blog_title, blog_post)
         db.session.add(add_post)
         db.session.commit()
-        newest_post= Blog.query.filter_by(title=blog_title).first()
-        post_id = newest_post.id
-        return render_template('blog.html/?id={post_id}'.format(post_id))
+        post_id = add_post.id
+        return redirect('/blog?id={0}'.format(post_id))
     return redirect('/')
 
 
