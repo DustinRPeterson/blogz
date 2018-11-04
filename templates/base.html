@@ -2,13 +2,7 @@
 <html>
     <head>
         <title>Blog</title>
-        <style>
-            .new_post_box {
-                height: 400px;
-                width: 400px;
-            }
-        </style>
-
+        <link rel="stylesheet"  href="{{ url_for('static', filename='style.css')}}">
         <header>
             <nav>
                 <a href="{{ url_for('blog_main') }}">Main Page</a>
@@ -17,7 +11,7 @@
         </header>
 
     </head>
-    <body>
+    <body style='background-color: gray;'>
 
         {% block content %}
         {% endblock %}

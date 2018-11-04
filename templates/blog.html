@@ -5,13 +5,13 @@
 
 
 <!-- If posts are stored render the posts-->
-    <ul>
+    <div>
         {% for post in posts %}
         <form method = 'get'>
-            <li><a href='./blog?id={{post.id}}'>{{post.title}}</a><br>{{post.post}}</li>
+            <p class='blog-post'><a href='./blog?id={{post.id}}'>{{post.title}}</a><br>{{post.post}}</p>
         </form>
         {% endfor %}
-    </ul>
+    </div>
 
 
 </div>
