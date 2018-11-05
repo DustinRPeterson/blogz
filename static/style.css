@@ -1,11 +1,32 @@
 header {
-    background-color: #d3d3d3;
+    background-color: cyan;
 }
 
 body {
-    background-color: gray;
+    background-color: teal;
 }
 
 li {
     padding: 10px;
+}
+
+.blog-title {
+    text-align: center;
+}
+
+.blog-post {
+    padding-left: 20px;
+    text-align: justify;
+}
+
+.post-error {
+    color: red;
+}
+
+.title-input {
+    
+}
+
+.blog-input {
+    padding-left: 20px;
 }

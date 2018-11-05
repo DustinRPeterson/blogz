@@ -5,18 +5,18 @@
 
     {% if valid_post==False %}
     <!--If the post submitted did not include a title or content then display error-->
-    <h2 style='color:red;'>Please enter a title and a post</h2>
+    <h2 class='post-error'>Please enter a title and a post</h2>
     {% endif %}
     <form method='post' action='/add-post'  class="new-post">
         <label>
             Title:
-            <input type="text" name="blog-title" />
+            <input type="text" name="blog-title" class='title-input' />
         </label>
         <br>
         <br>
         <label>
-            New Post:
-            <textarea name="blog-post" rows=10 cols=100></textarea>
+            New Post:<br>
+            <textarea name="blog-post" rows=10 cols=100 class='blog-input'></textarea>
         </label>
         <br>
         <input type='submit' value='Submit Post' />

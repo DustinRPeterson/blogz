@@ -8,7 +8,7 @@
     <div>
         {% for post in posts %}
         <form method = 'get'>
-            <p class='blog-post'><a href='./blog?id={{post.id}}'>{{post.title}}</a><br>{{post.post}}</p>
+            <h3 class='blog-title'><a href='./blog?id={{post.id}}'>{{post.title}}</a></h3><p class='blog-post'>{{post.post}}</p>
         </form>
         {% endfor %}
     </div>
