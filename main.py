@@ -6,6 +6,7 @@ app.config['DEBUG'] = True
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://blogz:blogzassignment@localhost:8889/blogz'
 app.config['SQLALCHEMY_ECHO'] = True
 db = SQLAlchemy(app)
+app.secret_key = 'y337kGcys&zP3B'
 
 
 
@@ -93,13 +94,13 @@ def signup():
                 db.session.add(new_user)
                 db.session.commit()
                 session['username'] = username
-                return redirect('/')
+                return redirect('/newpost')
             return "<h1>Invalid Information</h1>"
         else:
         #TODO - user better response messaging
            return "<h1>Duplicate user</h1>"
     
-    return render_template('register.html')
+    return render_template('signup.html')
 
 @app.route('/login')
 def login():
@@ -108,19 +109,28 @@ def login():
         password = request.form['password']
         user = User.query.filter_by(username=username).first()
         if user and user.password == password:
-            #session['username'] = username
+            session['username'] = username
             #flash("Logged in")
-            return redirect('/')
+            return redirect('/newpost')
         else:
-            flash('User password incorrect, or user does not exist', 'error')
+            
+
+    #Todo:
+        #Use Cases:
+            #2. User enters valid username with incorrect pw -
+                #redirected to /login with a message that pw is incorrect
+            #3. User enters an invalid username - 
+                #redirected to /login with error message that username does not exist
             
 
     return render_template('login.html')
 
 #@app.route('index')
 
-#def logout():
-    #return redirect('/blog')
+@app.route('/logout')
+def logout():
+    del session['username']
+    return redirect('/blog')
 
 
 
