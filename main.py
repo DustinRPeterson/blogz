@@ -102,10 +102,17 @@ def signup():
     
     return render_template('signup.html')
 
+    #Signup todos:
+        #Use Cases:
+            #User enters new valid username and password and verifies PW correctly
+                #and is redirected to /newpost with their username being stored in a session
+            #User leaves any of username, password, or verify fields blank
+                #and gets an error message that one or more fields are invalid.
+
 @app.route('/login')
 def login():
     if request.method == "POST":
-        emausernameil = request.form['username']
+        username = request.form['username']
         password = request.form['password']
         user = User.query.filter_by(username=username).first()
         if user and user.password == password:
@@ -113,15 +120,11 @@ def login():
             #flash("Logged in")
             return redirect('/newpost')
         else:
-            
-
-    #Todo:
-        #Use Cases:
-            #2. User enters valid username with incorrect pw -
-                #redirected to /login with a message that pw is incorrect
-            #3. User enters an invalid username - 
-                #redirected to /login with error message that username does not exist
-            
+            if user ='':
+                flash('Invalid username')
+            else if:
+                user.password != password:
+                flash('The password provided is not valid')
 
     return render_template('login.html')
 
