@@ -9,6 +9,8 @@
         {% for post in posts %}
         <form method = 'get'>
             <h3 class='blog-title'><a href='./blog?id={{post.id}}'>{{post.title}}</a></h3><p class='blog-post'>{{post.post}}</p>
+            <br>
+            <p>Written by: <a href='./blog?user={{post.owner.username}}'>{{post.owner.username}}</a></p>
         </form>
         {% endfor %}
     </div>
