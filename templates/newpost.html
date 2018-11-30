@@ -10,13 +10,13 @@
     <form method='post' action='/add-post'  class="new-post">
         <label>
             Title:
-            <input type="text" name="blog-title" class='title-input' />
+            <input type="text" name="blog-title" class='title-input' value='{{blog_title}}' />
         </label>
         <br>
         <br>
         <label>
             New Post:<br>
-            <textarea name="blog-post" rows=10 cols=100 class='blog-input'></textarea>
+            <textarea name="blog-post" rows=10 cols=100 class='blog-input' >{{blog_post}}</textarea>
         </label>
         <br>
         <input type='submit' value='Submit Post' />

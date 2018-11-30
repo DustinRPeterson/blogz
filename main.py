@@ -82,12 +82,14 @@ def add_post():
 
 
     if request.method == 'POST':
+        blog_title = ''
         blog_title = request.form['blog-title']
+        blog_post = ''
         blog_post = request.form['blog-post']
         valid_post = check_post(blog_title, blog_post)
         if valid_post == False:
             #if post is invalid re-render newpost page with an error message
-            return render_template('/newpost.html', valid_post=valid_post)
+            return render_template('/newpost.html', valid_post=valid_post, blog_title=blog_title, blog_post=blog_post)
         add_post = Blog(blog_title, blog_post, owner)
         db.session.add(add_post)
         db.session.commit()
@@ -105,7 +107,7 @@ def signup():
 
         if username =='' or password == '' or verify == '':
             flash('One or more fields left blank')
-            return render_template('signup.html')
+            return render_template('signup.html', username=username)
 
 
 
@@ -126,10 +128,10 @@ def signup():
                 return render_template('signup.html')
             elif password != verify:
                 flash('Password and confirmation do not match')
-                return render_template('signup.html')
+                return render_template('signup.html', username=username)
             elif pass_good == False:
                 flash('Please provide a valid password')
-                return render_template('signup.html')
+                return render_template('signup.html', username=username)
         else:
             flash('Duplicate user')
     
@@ -151,6 +153,7 @@ def login():
                 flash('Invalid username')
             elif user.password != password:
                 flash('The password provided is not valid')
+                return render_template('login.html', username=username)
 
     return render_template('login.html')
 
